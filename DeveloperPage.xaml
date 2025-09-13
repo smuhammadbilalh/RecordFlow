@@ -1,0 +1,465 @@
+<ContentPage x:Class="RecordFlow.DeveloperPage"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              Title="Record Flow"         
+           BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
+    Shell.NavBarIsVisible="True"
+  Shell.BackgroundColor = "{AppThemeBinding Light=White, Dark=Black}"            
+            
+         >
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light=White, Dark=Black}"
+                                   StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Light Theme Colors -->
+            <Color x:Key="PrimaryLight">#6366F1</Color>
+            <Color x:Key="SecondaryLight">#EC4899</Color>
+            <Color x:Key="SurfaceLight">#FFFFFF</Color>
+            <Color x:Key="OnSurfaceLight">#1F2937</Color>
+            <Color x:Key="OnBackgroundLight">#374151</Color>
+
+            <!-- Dark Theme Colors -->
+            <Color x:Key="PrimaryDark">#818CF8</Color>
+            <Color x:Key="SecondaryDark">#F472B6</Color>
+            <Color x:Key="SurfaceDark">#1F1F1F</Color>
+            <Color x:Key="OnSurfaceDark">#E5E7EB</Color>
+            <Color x:Key="OnBackgroundDark">#D1D5DB</Color>
+
+            <!-- Professional Social Media Colors -->
+            <Color x:Key="GitHubColor">#181717</Color>
+            <Color x:Key="LinkedInColor">#0A66C2</Color>
+            <Color x:Key="TwitterColor">#1DA1F2</Color>
+            <Color x:Key="WhatsAppColor">#25D366</Color>
+            <Color x:Key="EmailColor">#EA4335</Color>
+            <Color x:Key="PhoneColor">#34A853</Color>
+            <Color x:Key="FacebookColor">#1877F2</Color>
+            <Color x:Key="InstagramColor">#E4405F</Color>
+
+            <!-- Card Shadow Color -->
+            <Color x:Key="ShadowColor">#40000000</Color>
+
+            <!-- New Color Definitions -->
+            <Color x:Key="DarkPrimary">#6366F1</Color>
+            <Color x:Key="DarkSecondary">#94A3B8</Color>
+            <Color x:Key="LightPrimary">#4A6CF7</Color>
+            <Color x:Key="LightSecondary">#64748B</Color>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header Section - Moved outside ScrollView -->
+        <VerticalStackLayout Grid.Row="0" 
+                            Spacing="8" 
+                            HorizontalOptions="Center"
+                            Padding="24,24,24,0">
+            <Label Text="ABOUT DEVELOPER" 
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource LightPrimary}, Dark={StaticResource DarkPrimary}}" />
+
+            <Label Text="Details and Contact" 
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondary}, Dark={StaticResource DarkSecondary}}" />
+        </VerticalStackLayout>
+
+        <!-- Main Content ScrollView -->
+        <ScrollView Grid.Row="1" Padding="24">
+            <StackLayout Spacing="24">
+
+                <!-- Developer Profile Card -->
+                <Border  BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    StrokeThickness="0"
+    StrokeShape="RoundRectangle 16"
+    Padding="24">
+                    <Grid HorizontalOptions="Center" ColumnDefinitions="Auto,*" ColumnSpacing="16">
+
+                        <!-- Developer Avatar with Image -->
+                        <Frame Grid.Column="0"
+               WidthRequest="64"
+               HeightRequest="64"
+               CornerRadius="32"
+               Padding="0"
+               HasShadow="False"
+               BorderColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}"
+               IsClippedToBounds="True">
+                            <Image Source="pic.jpg"
+                   Aspect="AspectFill"
+                   WidthRequest="64"
+                   HeightRequest="64" />
+                        </Frame>
+
+                        <!-- Developer Info -->
+                        <StackLayout Grid.Column="1" 
+                VerticalOptions="Center"
+                Spacing="4">
+                            <Label Text="Muhammad Bilal"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}" />
+                            <Label Text="IT Specialist and App Developer"
+               FontSize="13"
+               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                        </StackLayout>
+                    </Grid>
+                </Border>
+
+                <StackLayout Spacing="12">
+
+                    <!-- Portfolio Button -->
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+             StrokeThickness="0"
+             StrokeShape="RoundRectangle 12">
+                        <Button Text="View Portfolio"
+                 FontSize="16"
+                 FontAttributes="Bold"
+                 BackgroundColor="Transparent"
+                 TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                 HeightRequest="56"
+                 Clicked="OnPortfolioClicked">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="MaterialIcons" 
+                                Glyph="&#xE8F4;" 
+                                Color="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" 
+                                Size="24" />
+                            </Button.ImageSource>
+                        </Button>
+                    </Border>
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 12">
+                        <Button Text="Join Us"
+    FontSize="16"
+    FontAttributes="Bold"
+    BackgroundColor="Transparent"
+    TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+    HeightRequest="56"
+    Clicked="OnWhatsAppBusinessTapped">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="MaterialIcons" 
+                   Glyph="&#xebcb;" 
+                   Color="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" 
+                   Size="24" />
+                            </Button.ImageSource>
+                        </Button>
+                    </Border>
+                </StackLayout>
+
+
+                <!-- Professional Social Media Section -->
+                <StackLayout Spacing="15" Padding="0,0,0,0">
+                    <Label Text="Connect With Me"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                       HorizontalOptions="Center" />
+
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="5,20">
+
+                        <StackLayout Spacing="25">
+                            <!-- Social Icons Grid Layout for 4x2 arrangement -->
+                            <Grid RowDefinitions="Auto,Auto" 
+                              ColumnDefinitions="*,*,*,*" 
+                              RowSpacing="24" 
+                              ColumnSpacing="12">
+
+                                <!-- First Row -->
+                                <!-- GitHub -->
+                                <StackLayout Grid.Row="0" Grid.Column="0" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="github_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnGitHubTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+                                               Offset="0,3"
+                                               Radius="5"
+                                               Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="GitHub"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- LinkedIn -->
+                                <StackLayout Grid.Row="0" Grid.Column="1" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="linkedin_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnLinkedInTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="LinkedIn"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- Twitter/X -->
+                                <StackLayout Grid.Row="0" Grid.Column="2" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="twitter_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnTwitterTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="Twitter"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- Facebook -->
+                                <StackLayout Grid.Row="0" Grid.Column="3" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="facebook_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnFacebookTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="Facebook"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- Second Row -->
+                                <!-- Instagram -->
+                                <StackLayout Grid.Row="1" Grid.Column="0" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="instagram_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnInstagramTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="Instagram"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- WhatsApp -->
+                                <StackLayout Grid.Row="1" Grid.Column="1" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="whatsapp_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnWhatsAppBusinessTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="WhatsApp"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- Email -->
+                                <StackLayout Grid.Row="1" Grid.Column="2" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="email_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnEmailTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="Email"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                                <!-- Phone -->
+                                <StackLayout Grid.Row="1" Grid.Column="3" 
+                                        Spacing="8" 
+                                        HorizontalOptions="Center">
+                                    <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#374151}"
+                                        StrokeShape="RoundRectangle 20"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        HorizontalOptions="Center"
+                                        Padding="12">
+                                        <Image Source="phone_icon.png"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnPhoneTapped" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource ShadowColor}"
+        Offset="0,3"
+        Radius="5"
+        Opacity="0.15" />
+                                        </Border.Shadow>
+                                    </Border>
+                                    <Label Text="Phone"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                                       HorizontalOptions="Center" />
+                                </StackLayout>
+
+                            </Grid>
+
+                            <!-- Professional tagline -->
+                            <Label Text="Follow for tech insights and development updates"
+                               FontSize="13"
+                               FontAttributes="Italic"
+                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               Margin="0,8,0,0" />
+                        </StackLayout>
+                    </Border>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="RecordFlow.MainPage"
+             Shell.NavBarHasShadow="False"
+             Shell.BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
+             Title="RecordFlow"
+             BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light=White, Dark=Black}"
+                                   StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}"/>
+    </ContentPage.Behaviors>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="SettingsToolbarItem" 
+                     Text="Settings" 
+                     Order="Primary" 
+                     Priority="0"
+                     Clicked="OnSettingsClicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons" 
+                                 Glyph="&#xe8b8;" 
+                                 Size="20" 
+                                 Color="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+
+        <ToolbarItem x:Name="MoreOptionsToolbarItem" 
+                     Text="More" 
+                     Order="Primary" 
+                     Priority="1"
+                     Clicked="OnMoreOptionsClicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons" 
+                                 Glyph="&#xe5d4;" 
+                                 Size="20" 
+                                 Color="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Light Theme Colors -->
+            <Color x:Key="LightPrimaryColor">#6750A4</Color>
+            <Color x:Key="LightSecondaryColor">#625B71</Color>
+            <Color x:Key="LightTertiaryColor">#7D5260</Color>
+            <Color x:Key="LightErrorColor">#BA1A1A</Color>
+            <Color x:Key="LightBackgroundColor">#FFFBFE</Color>
+            <Color x:Key="LightSurfaceColor">#FFFBFE</Color>
+            <Color x:Key="LightSurfaceVariantColor">#E7E0EC</Color>
+            <Color x:Key="LightOnPrimaryColor">#FFFFFF</Color>
+            <Color x:Key="LightOnSecondaryColor">#FFFFFF</Color>
+            <Color x:Key="LightOnSurfaceColor">#1C1B1F</Color>
+            <Color x:Key="LightOnSurfaceVariantColor">#49454F</Color>
+            <Color x:Key="LightOutlineColor">#79747E</Color>
+
+            <!-- Dark Theme Colors -->
+            <Color x:Key="DarkPrimaryColor">#D0BCFF</Color>
+            <Color x:Key="DarkSecondaryColor">#CCC2DC</Color>
+            <Color x:Key="DarkTertiaryColor">#EFB8C8</Color>
+            <Color x:Key="DarkErrorColor">#FFB4AB</Color>
+            <Color x:Key="DarkBackgroundColor">#1C1B1F</Color>
+            <Color x:Key="DarkSurfaceColor">#1C1B1F</Color>
+            <Color x:Key="DarkSurfaceVariantColor">#49454F</Color>
+            <Color x:Key="DarkOnPrimaryColor">#381E72</Color>
+            <Color x:Key="DarkOnSecondaryColor">#332D41</Color>
+            <Color x:Key="DarkOnSurfaceColor">#E6E1E5</Color>
+            <Color x:Key="DarkOnSurfaceVariantColor">#CAC4D0</Color>
+            <Color x:Key="DarkOutlineColor">#938F99</Color>
+
+            <!-- Style definitions -->
+            <Style x:Key="HeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+            </Style>
+
+            <Style x:Key="SubHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSurfaceVariantColor}, Dark={StaticResource DarkOnSurfaceVariantColor}}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+            </Style>
+
+            <Style x:Key="StatusLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,12,0,8" />
+            </Style>
+
+            <Style x:Key="TimerLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,8,0,12" />
+            </Style>
+
+            <Style x:Key="RecordButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnPrimaryColor}, Dark={StaticResource DarkOnPrimaryColor}}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="HeightRequest" Value="48" />
+                <Setter Property="Margin" Value="8,5" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{AppThemeBinding Light=#40000000, Dark=#60000000}" 
+                                Offset="0,3" 
+                                Radius="1" 
+                                Opacity="0.25" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="StopButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="HeightRequest" Value="48" />
+                <Setter Property="Margin" Value="8,5" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{AppThemeBinding Light=#40000000, Dark=#60000000}" 
+                                Offset="0,3" 
+                                Radius="1" 
+                                Opacity="0.25" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSecondaryColor}, Dark={StaticResource DarkOnSecondaryColor}}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="20,5" />
+            </Style>
+
+            <Style x:Key="CardStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSurfaceColor}, Dark={StaticResource DarkSurfaceColor}}" />
+                <Setter Property="CornerRadius" Value="16" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="16,8" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{AppThemeBinding Light=#20000000, Dark=#40000000}" 
+                                Offset="0,2" 
+                                Radius="2" 
+                                Opacity="0.15" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,16" />
+            </Style>
+
+            <Style x:Key="SettingLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="TipTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightOnSurfaceVariantColor}, Dark={StaticResource DarkOnSurfaceVariantColor}}" />
+                <Setter Property="Margin" Value="0,4" />
+                <Setter Property="LineHeight" Value="1.4" />
+            </Style>
+
+            <LinearGradientBrush x:Key="AccentGradientLight" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#059669" Offset="0" />
+                <GradientStop Color="#F59E0B" Offset="1" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="AccentGradientDark" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#34D399" Offset="0" />
+                <GradientStop Color="#FBBF24" Offset="1" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="5" >
+            
+            <!-- Header Section -->
+            <Frame Style="{StaticResource CardStyle}" Margin="16,24,16,8">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" Spacing="0">
+                        <Label Text="&#xe04b;" 
+                               FontFamily="MaterialIcons"
+                               FontSize="36"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Margin="0,0,16,0"
+                               TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                        <Label Text="RecordFlow" Style="{StaticResource HeaderStyle}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!-- Status Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <StackLayout Spacing="8">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+                        <Label Text="&#xe889;" 
+                               FontFamily="MaterialIcons"
+                               FontSize="24"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="0,0,16,0"
+                               TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                        <Label Text="Recording Status" Style="{StaticResource SectionTitleStyle}" />
+                    </StackLayout>
+
+                    <Label x:Name="StatusLabel" 
+                           Text="Ready to Record" 
+                           Style="{StaticResource StatusLabelStyle}" />
+
+                    <Label x:Name="TimerLabel" 
+                           Text="00:00:00" 
+                           Style="{StaticResource TimerLabelStyle}" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Recording Controls -->
+            <Frame Style="{StaticResource CardStyle}">
+                <StackLayout Spacing="15">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+                        <Label Text="&#xe02f;" 
+                               FontFamily="MaterialIcons"
+                               FontSize="24"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="0,0,16,0"
+                               TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                        <Label Text="Recording Controls" Style="{StaticResource SectionTitleStyle}" />
+                    </StackLayout>
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto" ColumnSpacing="0">
+                        <Button x:Name="StartRecordingButton" 
+                                Grid.Column="0"
+                                Text="Start" 
+                                Style="{StaticResource RecordButtonStyle}" 
+                                Clicked="OnStartRecordingClicked">
+                            <Button.ImageSource>
+                                <FontImageSource 
+                                    FontFamily="MaterialIcons"
+                                                 Glyph="&#xe037;" 
+                                                 Size="30" 
+                                                 Color="{AppThemeBinding Light={StaticResource LightOnPrimaryColor}, Dark={StaticResource DarkOnPrimaryColor}}" />
+                            </Button.ImageSource>
+                        </Button>
+
+                        <Button x:Name="StopRecordingButton" 
+                                Grid.Column="1"
+                                Text="Stop" 
+                                Style="{StaticResource StopButtonStyle}" 
+                                IsEnabled="False" 
+                                Clicked="OnStopRecordingClicked">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="MaterialIcons" 
+                                                 Glyph="&#xe047;" 
+                                                 Size="30" 
+                                                 Color="White" />
+                            </Button.ImageSource>
+                        </Button>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!-- Settings Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <StackLayout Spacing="12">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+                        <Label Text="&#xe8b8;" 
+                               FontFamily="MaterialIcons"
+                               FontSize="24"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="0,0,16,0"
+                               TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+                        <Label Text="Quick Settings" Style="{StaticResource SectionTitleStyle}" />
+                    </StackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto" Margin="0,4">
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
+                            <Label Text="&#xe029;" 
+                                   FontFamily="MaterialIcons"
+                                   FontSize="20"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Margin="0,0,16,0"
+                                   TextColor="{AppThemeBinding Light={StaticResource LightOnSurfaceColor}, Dark={StaticResource DarkOnSurfaceColor}}" />
+                            <Label Text="Record Audio" Style="{StaticResource SettingLabelStyle}" />
+                        </StackLayout>
+
+                        <Switch x:Name="AudioSwitch" 
+                                Grid.Column="1"
+                                IsToggled="True" 
+                                VerticalOptions="Center" />
+                    </Grid>
+
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

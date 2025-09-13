@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+	<!-- Target API level -->
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+
+	<!-- Basic permissions -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+
+	<!-- Audio and Camera permissions -->
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+	<!-- Storage permissions -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+                     tools:ignore="ScopedStorage" />
+
+	<!-- Storage permissions for Android 13+ -->
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+	<!-- Notification permissions for Android 13+ -->
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+	<!-- Foreground service permissions -->
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+
+	<!-- Screen recording permissions -->
+	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+	<uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+	<uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT"
+                     tools:ignore="ProtectedPermissions" />
+
+	<!-- System audio capture permissions (limited success on Android 14) -->
+	<uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
+                     tools:ignore="ProtectedPermissions" />
+	<uses-permission android:name="android.permission.CAPTURE_AUDIO_HOTWORD"
+                     tools:ignore="ProtectedPermissions" />
+
+	<application
+        android:allowBackup="true"
+        android:icon="@mipmap/appicon"
+        android:theme="@style/Maui.SplashTheme"
+        android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true">
+
+		<!-- Screen Recording Service -->
+		<service android:name="Plugin.Maui.ScreenRecording.ScreenRecordingImplementation.ScreenRecordingService"
+                 android:exported="false"
+                 android:foregroundServiceType="mediaProjection" />
+
+		<!-- Recording Foreground Service -->
+		<service android:name="RecordFlow.Platforms.Android.RecordingForegroundService"
+                 android:enabled="true"
+                 android:exported="false"
+                 android:foregroundServiceType="mediaProjection" />
+
+		<!-- Media Projection Activity -->
+		<activity android:name="Plugin.Maui.ScreenRecording.ScreenRecordingImplementation.MediaProjectionActivity"
+                  android:exported="false"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+		<!-- Notification Action Receiver -->
+		<receiver android:name="RecordFlow.Platforms.Android.NotificationActionReceiver"
+                  android:enabled="true"
+                  android:exported="false">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="STOP_RECORDING_ACTION" />
+			</intent-filter>
+		</receiver>
+
+	</application>
+</manifest>
